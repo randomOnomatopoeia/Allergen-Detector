@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".OCR">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--button to take image-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_capture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/takeImage"
+            android:text="@string/takeImage"
+            app:cornerRadius="5dp" />
+
+        <!--button to get text from the image-->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_allergens"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="1"
+            android:text="@string/addAllergen"
+            app:cornerRadius="5dp" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--ImageView: show image taken-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageIv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/image"
+                app:srcCompat="@drawable/download"
+                app:strokeWidth="2dp" />
+
+            <!--TextView: show text from image that will be recognized-->
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:id="@+id/output"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/recognized" />
+
+            <!--EditText: show recognized text -->
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="output"
+                android:textSize="12sp"
+                 />
+            
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/checkAllergies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cornerRadius="5dp"
+                android:text="@string/findAllergens"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/results"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="20sp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

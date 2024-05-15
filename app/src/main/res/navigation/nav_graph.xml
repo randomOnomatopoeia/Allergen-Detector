@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/runner_Class">
+
+    <activity
+        android:id="@+id/runner_Class"
+        android:name="com.example.allergendetector.runner_Class"
+        android:label="activity_navigation"
+        tools:layout="@layout/activity_navigation" />
+    <activity
+        android:id="@+id/OCR"
+        android:name="com.example.allergendetector.OCR"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <action
+        android:id="@+id/toAllergens"
+        app:destination="@id/runner_Class"
+        app:enterAnim="@anim/nav_default_enter_anim" />
+    <action
+        android:id="@+id/toOCR"
+        app:destination="@id/OCR" />
+</navigation>

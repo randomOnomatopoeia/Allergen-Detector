@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Allergen Detector</string>
+    <string name="output">Hello!</string>
+    <string name="takeImage">Get image</string>
+    <string name="image">Image</string>
+    <string name="recognize">Get text</string>
+    <string name="recognized">Recognized Text</string>
+    <string name="findAllergens">Check Allergies</string>
+    <string name="tab3">Allergies: </string>
+    <string name="tab1">Home</string>
+    <string name ="nav">Allergens</string>
+    <string name ="Allergen">Add an allergy by typing it in. Spelling must be correct; not case-sensitive.</string>
+    <string name ="addAllergen">Add Allergies</string>
+    <string name ="checkAllergen">Scan a label and check for allergens</string>
+    <string name ="severity">This allergy is severe enough to avoid traces</string>
+    <string name ="addGroup">If you are only allergic to certain items in the group above, add them here and separate items with commas (ex. pistachios, walnuts)</string>
+    <string name ="fake">This item was flagged for Nuts. It is not recommended that you ingest it.</string>
+</resources>
