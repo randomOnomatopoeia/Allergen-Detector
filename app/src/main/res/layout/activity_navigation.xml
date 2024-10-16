@@ -11,17 +11,18 @@
     <TextView
         android:id="@+id/allergenHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="20sp"
         android:layout_gravity="top"
         android:layout_margin="10dp"
-        android:text="@string/tab3"
+        android:text="@string/Allergies"
         android:layout_weight="1"
         />
     <TextView
         android:id="@+id/allergensList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
 
         />
 

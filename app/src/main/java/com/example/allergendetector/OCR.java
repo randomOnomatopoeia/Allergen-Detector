@@ -26,8 +26,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-//import androidx.navigation.NavController;
-//import androidx.navigation.Navigation;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.content.Intent;
 import android.provider.MediaStore;
@@ -37,11 +37,13 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
+
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+
 
 import java.util.ArrayList;
 
@@ -96,12 +98,6 @@ public class OCR extends AppCompatActivity {
         // initializing arrays of permissions
         cameraPermissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
-        // initializing progressDialog
-        //progressBar = new ProgressBar(this);
-
-        //text recognizer
-        textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
-
         // handle clicking button_capture; translate image
         button_capture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,26 +106,24 @@ public class OCR extends AppCompatActivity {
             }
         });
 
+        // Initialize TextRecognizer with options
+        TextRecognizerOptions options = new TextRecognizerOptions.Builder().build();
+        textRecognizer = TextRecognition.getClient(options);
+
         // handle button for checking allergies
         button_check.setOnClickListener(v -> {
+
             // check imageUri to see if image exists
             if (imageUri == null) {
                 // show error message if no image is picked
                 Toast.makeText(OCR.this, "Pick image", Toast.LENGTH_SHORT).show();
 
             } else {
-                // if it exists, recognize th text
+                // if it exists, recognize the text
                 recognizeTextFromImage();
             }
             String text = editText.getText().toString().trim();
-            ocrResults = makeArray(text);
-            Log.d(TAG, String.valueOf(ocrResults));
-            Log.d("Allergy", String.valueOf(allergies.size()));
-            if (!ocrResults.isEmpty()) {
-                Log.d("OCR", ocrResults.get(0));
-            } else {
-                Log.d(TAG, String.valueOf(ocrResults.size()));
-            }
+            ocrResults = makeArray(text, true);
             checkAllergies(allergies, results);
         });
 
@@ -137,16 +131,18 @@ public class OCR extends AppCompatActivity {
         add_allergens.setOnClickListener(view -> {
             // Using Navigation component to navigate to a destination
             addAllergen();
-            Log.d(TAG, String.valueOf(allergies));
         });
 
     }
 
-    public static ArrayList<String> makeArray(String groupText) {
+    public static ArrayList<String> makeArray(String groupText, Boolean traces) {
         // make usableText variable to minimize mistakes
         String usableText = "";
         if (groupText.toLowerCase().contains("ingredients:") && groupText.contains(".")) {
             usableText = groupText.substring(groupText.indexOf(":") + 2, groupText.indexOf("."));
+            if (groupText.toLowerCase().contains("may contain:") && traces) {
+
+            }
         } else {
             usableText = groupText;
         }
@@ -167,6 +163,7 @@ public class OCR extends AppCompatActivity {
         PopupMenu popupMenu = new PopupMenu(this, button_capture);
         popupMenu.getMenu().add(Menu.NONE, 1, 1, "Add Allergy");
         popupMenu.getMenu().add(Menu.NONE, 2, 2, "See Allergies");
+        popupMenu.getMenu().add(Menu.NONE, 3, 3, "Delete Allergy");
         popupMenu.show();
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -176,6 +173,7 @@ public class OCR extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(OCR.this);
                 LayoutInflater inflater = getLayoutInflater();
                 View allergenPopup = inflater.inflate(R.layout.activity_navigation, null);
+                View allergenDelete = inflater.inflate(R.layout.activity_delete, null);
 
                 // set showAllergens equal to text allergensList that shows allergies
                 showAllergens = allergenPopup.findViewById(R.id.allergensList);
@@ -183,15 +181,24 @@ public class OCR extends AppCompatActivity {
                 // determine which button was pressed
                 int id = item.getItemId();
 
-                //
+                //if 1 is pressed, show popup for adding allergens and add allergy to arrayList allergies
                 if (id == 1) {
                     runner_Class.addAllergen(allergies, OCR.this, showAllergens);
-                    String a = showAllergens.getText().toString();
-                    Log.d("before", a);
-
+                // if 2 is pressed, show allergy list
                 } else if (id == 2) {
+                    // Update the showAllergens TextView before showing the dialog
+                    StringBuilder allergensText = new StringBuilder();
+                    for (int i = 1; i <= allergies.size(); i++) {
+                        allergensText.append(i).append(". ").append(allergies.get(i-1)).append("\n");
+                    }
+                    showAllergens.setText(allergensText.toString());
+
+                    // Set the updated view to the AlertDialog
                     builder.setView(allergenPopup);
-                    builder.show();
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                } else {
+                    runner_Class.deleteAllergen(allergies, OCR.this);
 
                 }
                 return true;
@@ -248,7 +255,7 @@ public class OCR extends AppCompatActivity {
                         editText.setText(recognizedText);
                     }).addOnFailureListener(e -> {
                         Log.e(TAG, "onFailure: ", e);
-                        Toast.makeText(OCR.this, "Failed recognizing text due to " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OCR.this, "Failed:" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     });
 
         } catch (Exception e) {

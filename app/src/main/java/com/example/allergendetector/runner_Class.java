@@ -9,6 +9,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,9 +44,6 @@ public class runner_Class extends AppCompatActivity {
 
 
     public static void addAllergen(ArrayList<Allergens> allergies, Context context, TextView showAllergens) {
-        String beforeSize = "" + allergies.size();
-        Log.d("before", beforeSize);
-
         // initialize inflater, Builder, and activity_input.xml file
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -86,6 +84,37 @@ public class runner_Class extends AppCompatActivity {
 
 
     }
+    public static void deleteAllergen(ArrayList<Allergens> allergies, Context context) {
+
+        // initialize inflater, Builder, and activity_input.xml file
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View allergenPopup = inflater.inflate(R.layout.activity_delete, null);
+
+        // define input areas from allergenPopup
+        EditText allergenName = allergenPopup.findViewById(R.id.editTextAllergy);
+
+        // show popup and get values from the user
+        builder.setView(allergenPopup)
+                // add submit button that takes user input to display and deletes that index from ArrayList allergens
+                .setPositiveButton("Submit", ((dialog, which) -> {
+                    Integer allergenText = Integer.valueOf(allergenName.getText().toString());
+                    allergies.remove(allergenText-1);
+
+                }))
+
+                // add cancel button that cancels deleting an allergen
+                .setNegativeButton("Cancel", ((dialog, which) -> {
+                    dialog.dismiss();
+
+                }))
+
+                // show the popup
+                .show();
+
+
+    }
+
 
 
 }

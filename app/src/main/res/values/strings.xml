@@ -6,13 +6,25 @@
     <string name="recognize">Get text</string>
     <string name="recognized">Recognized Text</string>
     <string name="findAllergens">Check Allergies</string>
-    <string name="tab3">Allergies: </string>
+    <string name="Allergies">Allergies: </string>
     <string name="tab1">Home</string>
-    <string name ="nav">Allergens</string>
-    <string name ="Allergen">Add an allergy by typing it in. Spelling must be correct; not case-sensitive.</string>
-    <string name ="addAllergen">Add Allergies</string>
-    <string name ="checkAllergen">Scan a label and check for allergens</string>
-    <string name ="severity">This allergy is severe enough to avoid traces</string>
-    <string name ="addGroup">If you are only allergic to certain items in the group above, add them here and separate items with commas (ex. pistachios, walnuts)</string>
-    <string name ="fake">This item was flagged for Nuts. It is not recommended that you ingest it.</string>
+    <string name="nav">Allergens</string>
+    <string name="Allergen">Add an allergy by typing it in. Spelling must be correct; not case-sensitive.</string>
+    <string name="addAllergen">Add Allergies</string>
+    <string name="checkAllergen">Scan a label and check for allergens</string>
+    <string name="severity">This allergy is severe enough to avoid traces</string>
+    <string name="addGroup">If you are only allergic to certain items in the group above, add them here and separate items with commas (ex. pistachios, walnuts)</string>
+    <string name="fake">This item was flagged for Nuts. It is not recommended that you ingest it.</string>
+    <string name="delete">Enter the number you wish to delete.</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="start">SafeScan</string>
+    <string name="next_level">Start</string>
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
 </resources>
