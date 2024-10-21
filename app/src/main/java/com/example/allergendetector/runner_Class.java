@@ -51,7 +51,7 @@ public class runner_Class extends AppCompatActivity {
 
         // define input areas from allergenPopup
         EditText allergenName = allergenPopup.findViewById(R.id.editTextAllergy);
-        CheckBox severity = allergenPopup.findViewById(R.id.checkSeverity);
+        //CheckBox severity = allergenPopup.findViewById(R.id.checkSeverity);
 
         // show popup and get values from the user
         builder.setView(allergenPopup)
@@ -59,9 +59,8 @@ public class runner_Class extends AppCompatActivity {
                 .setPositiveButton("Submit", ((dialog, which) -> {
                     String allergenText = allergenName.getText().toString();
                     String result = "Allergies: \n";
-                    boolean severityChecked = severity.isChecked();
 
-                    Allergens allergy = new Allergens(allergenText, severityChecked);
+                    Allergens allergy = new Allergens(allergenText);
                     allergies.add(allergy);
 
                     // for each Allergens in allergies, add it to String results to be displayed

@@ -66,6 +66,7 @@ dependencies {
     implementation("androidx.navigation:navigation-ui:$nav_version")
 
     // Other necessary dependencies
+    implementation ("com.google.android.gms:play-services-vision:20.1.3")
     implementation("com.google.android.gms:play-services-base:18.5.0")
     implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.appcompat:appcompat:1.6.1") // Update to the latest version

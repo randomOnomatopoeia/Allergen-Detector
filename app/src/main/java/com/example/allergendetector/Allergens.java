@@ -8,28 +8,25 @@ public class Allergens {
     private String name;
 
     // if true, avoid traces of allergen
-    private boolean severity;
+    //private boolean severity;
 
     // add to Allergen ArrayList
-    public Allergens (String name, boolean severity) {
+    public Allergens (String name) {
         this.name = name;
-        this.severity = severity;
+        //this.severity = severity;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public boolean getSeverity(){return this.severity;}
+    //public boolean getSeverity(){return this.severity;}
 
     @NonNull
     @Override
     public String toString() {
-        if (getSeverity()) {
-            return "Severe allergy to " + getName();
-        } else{
-            return "Non-severe allergy to " + getName();
-        }
+            return getName();
+
     }
 }
 

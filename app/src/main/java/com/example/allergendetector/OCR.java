@@ -46,6 +46,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class OCR extends AppCompatActivity {
@@ -135,24 +136,24 @@ public class OCR extends AppCompatActivity {
 
     }
 
+    // make ocrResults array
     public static ArrayList<String> makeArray(String groupText, Boolean traces) {
         // make usableText variable to minimize mistakes
         String usableText = "";
         if (groupText.toLowerCase().contains("ingredients:") && groupText.contains(".")) {
             usableText = groupText.substring(groupText.indexOf(":") + 2, groupText.indexOf("."));
-            if (groupText.toLowerCase().contains("may contain:") && traces) {
-
-            }
         } else {
             usableText = groupText;
         }
         // split the string at each comma
-        String[] splitArray = usableText.split("");
+        String[] splitArray = usableText.split(",");
         // convert the resulting array into an ArrayList<String>
         ArrayList<String> result = new ArrayList<>();
-
+        Log.d(TAG, "onSuccess: recognizedText:" + Arrays.toString(splitArray));
+        // add splitArray items to result
         for (String item : splitArray) {
             result.add(item.trim());  // Trim to remove any extra spaces around each element
+
         }
 
         return result;
